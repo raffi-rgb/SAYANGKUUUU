@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Salma 💖</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg, #fcb69f 0%, #ff9a9e 50%, #fad0c4 100%);
+  overflow-x: hidden;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  padding: 50px 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 28px;
+  text-shadow: 0 0 20px #fff1f7, 0 0 30px #ffe3ec;
+  line-height: 1.5;
+}
+
+button {
+  margin-top: 25px;
+  background-color: #ff4b5c;
+  border: none;
+  padding: 12px 28px;
+  color: white;
+  font-size: 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 15px #ffb6c1;
+}
+
+button:hover {
+  background-color: #ff6f91;
+  transform: scale(1.05);
+}
+
+#pesan {
+  display: none;
+  font-size: 32px;
+  margin-top: 40px;
+  color: #fff0f6;
+  text-shadow: 0 0 20px #ff99c8, 0 0 40px #ff4b5c;
+  white-space: pre-line;
+}
+
+#dariRaffi {
+  display: none;
+  font-size: 22px;
+  margin-top: 25px;
+  color: #fffdfd;
+  text-shadow: 0 0 12px #ffb6c1;
+  animation: fadeIn 2s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+.typed {
+  border-right: 3px solid #fff;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% {border-color:transparent;}
+}
+
+.heart {
+  position: absolute;
+  color: #ff1e56;
+  animation: floatUp 6s linear forwards;
+  opacity: 0.9;
+  z-index: 0;
+}
+
+@keyframes floatUp {
+  0% {transform:translateY(0) rotate(0deg) scale(1); opacity:1;}
+  100% {transform:translateY(-800px) rotate(360deg) scale(1.5); opacity:0;}
+}
+
+.music-container {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.music-btn {
+  background-color: #ff4b5c;
+  border: none;
+  padding: 10px 25px;
+  color: white;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #ffb6c1;
+  transition: 0.3s;
+}
+
+.music-btn:hover {
+  background-color: #ff6f91;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>HALO SAYAANGG 💕</h1>
+  <p>Aku punya sesuatu buat kamu 💌</p>
+  <button onclick="tampilkanPesan()">Klik di sini 💖</button>
+  <div id="pesan"></div>
+  <div id="dariRaffi">— dari Raffi, kesayangan kamu only wan :3 💞</div>
+</div>
+
+<div class="music-container">
+  <button class="music-btn" id="musicBtn">▶️ Play Musik</button>
+  <audio id="musik">
+    <source src="https://alpha.123tokyo.xyz/get.php/9/34/2PP_hPqVt_c.mp3?n=Kahitna%20-%20Cantik%20%28Official%20Lyric%20Video%29&uT=R&uN=ZHVieWE%3D&h=DKf-mWFD_6vWdTERItB6OQ&s=1761364319&uT=R&uN=ZHVieWE%3D" type="audio/mpeg">
+    Browsermu tidak mendukung audio.
+  </audio>
+</div>
+
+<script>
+// Hati berterbangan
+function buatHati(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.textContent = "❤️";
+  heart.style.left = Math.random()*window.innerWidth+"px";
+  heart.style.fontSize = (Math.random()*20+10)+"px";
+  heart.style.transform=`rotate(${Math.random()*360}deg)`;
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+}
+setInterval(buatHati,500);
+
+// Pesan mengetik
+function tampilkanPesan(){
+  const pesanDiv = document.getElementById("pesan");
+  const dariRaffi = document.getElementById("dariRaffi");
+  const teks = "semangat kerjanya ya cantikkuu! fighting for todayyyy 💪\ni'm here for u when u tired, bored, n sad :>";
+  pesanDiv.style.display = "block";
+  let i = 0;
+  const speed = 70;
+  pesanDiv.classList.add("typed");
+  function ketik(){
+    if(i < teks.length){
+      pesanDiv.textContent += teks.charAt(i);
+      i++;
+      setTimeout(ketik, speed);
+    } else {
+      pesanDiv.classList.remove("typed");
+      setTimeout(()=>{ dariRaffi.style.display = "block"; }, 1000);
+    }
+  }
+  ketik();
+}
+
+// Kontrol Musik 30 detik dengan toggle aman
+const musicBtn = document.getElementById("musicBtn");
+const musik = document.getElementById("musik");
+let isPlaying = false;
+let stopTimeout = null;
+
+musicBtn.addEventListener("click", () => {
+  if(!isPlaying){
+    if(musik.currentTime === musik.duration) musik.currentTime = 0;
+    musik.play();
+    musicBtn.textContent = "⏸️ Pause Musik";
+    isPlaying = true;
+
+    stopTimeout = setTimeout(() => {
+      musik.pause();
+      musicBtn.textContent = "▶️ Play Musik";
+      isPlaying = false;
+      stopTimeout = null;
+    }, 30000);
+
+  } else {
+    musik.pause();
+    musicBtn.textContent = "▶️ Play Musik";
+    isPlaying = false;
+    if(stopTimeout) {
+      clearTimeout(stopTimeout);
+      stopTimeout = null;
+    }
+  }
+});
+</script>
+
+</body>
+</html>
